@@ -164,6 +164,17 @@ body {
   color: #ff4d6d;
   margin-bottom: 10px;
 }
+#event-details h3 {
+  font-size: 16px;
+  color: #333;
+  margin: 10px 0;
+}
+#event-details p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin: 10px 0;
+}
 
 /* 힌트 문구 */
 #hint {
@@ -285,7 +296,7 @@ let currentYear = null;
 let currentMonth = 0;
 
 const events = {
-  "2023-3-2": { displayText:"입학/시업식", title:"입학/시업식", desc:"", textColor:"#006600", borderColor:"#00CC00", groupId:"입학시업2023" },
+  "2023-3-2": { displayText:"입학/시업식", title:"입학/시업식", desc:"2023학년도 입학식 및 시업식", textColor:"#006600", borderColor:"#00CC00", groupId:"입학시업2023" },
   "2023-3-23": { displayText:"3월평가", title:"3월전국연합학력평가", desc:"", textColor:"#0066CC", borderColor:"#00CCFF", groupId:"3월평가2023" },
   "2023-4-26": { displayText:"중간고사", title:"1학기 중간고사", desc:"", textColor:"#990000", borderColor:"#FF0000", groupId:"중간고사2023-1" },
   "2023-4-27": { displayText:"중간고사", title:"1학기 중간고사", desc:"", textColor:"#990000", borderColor:"#FF0000", groupId:"중간고사2023-1" },
@@ -361,9 +372,9 @@ const events = {
   "2024-12-26": { displayText:"선배만남", title:"선배와의 만남", desc:"", textColor:"#0066CC", borderColor:"#00CCFF", groupId:"선배만남2024" },
   "2024-12-31": { displayText:"방학식", title:"겨울방학식", desc:"", textColor:"#006600", borderColor:"#00CC00", groupId:"방학식2024" },
 
-  "2025-2-4": { displayText:"개학식", title:"개학식", desc:"안녕하세요", textColor:"#006600", borderColor:"#00CC00", groupId:"개학식2025" },
-  "2025-2-7": { displayText:"졸업/종업", title:"졸업/종업식", desc:"", textColor:"#990000", borderColor:"#FF0000", groupId:"졸업식2025" },
-  "2025-3-4": { displayText:"입학/시업", title:"입학/시업식", desc:"", textColor:"#006600", borderColor:"#00CC00", groupId:"입학시업2025" },
+  "2025-2-4": { displayText:"개학식", title:"개학식", desc:"2025년 새 학기가 시작됩니다!", textColor:"#006600", borderColor:"#00CC00", groupId:"개학식2025" },
+  "2025-2-7": { displayText:"졸업/종업", title:"졸업/종업식", desc:"선배님들의 졸업을 축하합니다.", textColor:"#990000", borderColor:"#FF0000", groupId:"졸업식2025" },
+  "2025-3-4": { displayText:"입학/시업", title:"입학/시업식", desc:"새로운 학생들을 환영합니다!", textColor:"#006600", borderColor:"#00CC00", groupId:"입학시업2025" },
   "2025-3-26": { displayText:"3월모고", title:"3월전국연합학력평가", desc:"", textColor:"#0066CC", borderColor:"#00CCFF", groupId:"3월평가2025" },
   "2025-4-9": { displayText:"수학여행/꽃동네", title:"수학여행(1학년) / 꽃동네 봉사활동(2학년)", desc:"", textColor:"#CC6600", borderColor:"#FF9933", groupId:"수학여행2025" },
   "2025-4-10": { displayText:"", title:"수학여행(1학년) / 꽃동네 봉사활동(2학년)", desc:"", textColor:"#CC6600", borderColor:"#FF9933", groupId:"수학여행2025" },
@@ -371,7 +382,7 @@ const events = {
   "2025-4-30": { displayText:"중간고사", title:"1학기 중간고사", desc:"", textColor:"#990000", borderColor:"#FF0000", groupId:"중간고사2025-1" },
   "2025-5-1": { displayText:"중간고사", title:"1학기 중간고사", desc:"", textColor:"#990000", borderColor:"#FF0000", groupId:"중간고사2025-1" },
   "2025-5-2": { displayText:"중간고사", title:"1학기 중간고사", desc:"", textColor:"#990000", borderColor:"#FF0000", groupId:"중간고사2025-1" },
-  "2025-5-9": { displayText:"체육한마당", title:"달여울 체육한마당", desc:"", textColor:"#CC6600", borderColor:"#FF9933", groupId:"체육한마당2025" },
+  "2025-5-9": { displayText:"체육한마당", title:"달여울 체육한마당", desc:"전교생이 함께하는 체육대회입니다!", textColor:"#CC6600", borderColor:"#FF9933", groupId:"체육한마당2025" },
   "2025-5-13": { displayText:"버스킹", title:"5월 버스킹", desc:"", textColor:"#CC6600", borderColor:"#FF9933", groupId:"버스킹2025-5" },
   "2025-5-26": { displayText:"건강검진", title:"학생건강검진", desc:"", textColor:"#0066CC", borderColor:"#00CCFF", groupId:"건강검진2025" },
   "2025-5-27": { displayText:"모의기구", title:"모의국제기구회의", desc:"", textColor:"#990066", borderColor:"#FF33CC", groupId:"모의기구2025" },
@@ -654,7 +665,11 @@ function renderCalendar(){
     cell.onclick = () => {
       if(eventData){
         const e = eventData;
-        document.getElementById('event-content').innerHTML = `<h3>${e.title}</h3><p>${e.desc}</p>`;
+        let content = `<h3>${e.title}</h3>`;
+        if(e.desc && e.desc.trim() !== "") {
+          content += `<p>${e.desc}</p>`;
+        }
+        document.getElementById('event-content').innerHTML = content;
       } else {
         document.getElementById('event-content').innerHTML = "선택한 날짜에 이벤트가 없습니다.";
       }
@@ -679,4 +694,3 @@ function renderCalendar(){
 </script>
 </body>
 </html>
-
